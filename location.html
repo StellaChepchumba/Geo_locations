@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>locations</title>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMq3xqBaqYQ8MuufNFUZ62xhQi1_85jNg"></script>
+</head>
+<body>
+  <div id="map" style="width: 100%; height: 100vh;"></div>
+
+  <div id="sidebar">
+    <h2>Customer Locations</h2>
+    <ul id="customer-list"></ul>
+  </div>
+  <style>
+    #sidebar {
+      background-color: #be160a; /* Red background color */
+      color: #fff; /* White text color */
+      padding: 10px;
+      width: 300px;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
+
+    #customer-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    #customer-list li {
+      margin-bottom: 10px;
+    }
+  </style>
+
+  <script>
+    function initMap() {
+      const map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: -0.3272962, lng: 35.9407551 },
+        zoom: 8
+      });
+
+      const customers = [
+        { name: "Customer 1", location: { lat:  -0.3272962, lng: 35.9407551 } },
+  
+      ];
+
+      const sidebar = document.getElementById("customer-list");
+
+      customers.forEach((customer) => {
+        const marker = new google.maps.Marker({
+          position: customer.location,
+          map: map
+        });
+
+        const listItem = document.createElement("li");
+        listItem.textContent = customer.name;
+        sidebar.appendChild(listItem);
+
+        marker.addListener("click", () => {
+          // Handle marker click event
+        });
+      });
+    }
+
+    window.onload = initMap;
+  </script>
+</body>
+</html>
